@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     bool grounded;
     PlayerControls playerControls;
 
+    bool inputDisabled;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -37,7 +39,11 @@ public class PlayerMovement : MonoBehaviour
     {
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, ground);
 
-        PlayerInput();
+        if (!inputDisabled)
+        {
+            PlayerInput();
+        }
+
         SpeedControl();
         DragControl();
     }
@@ -109,6 +115,13 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.drag = 0;
         }
+    }
+
+    public void DisableInput()
+    {
+        inputDisabled = true;
+        horizontalInput = 0f;
+        verticalInput = 0f;
     }
 
     private void OnDestroy()

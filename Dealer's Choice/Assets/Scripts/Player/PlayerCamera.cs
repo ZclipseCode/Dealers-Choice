@@ -10,6 +10,7 @@ public class PlayerCamera : MonoBehaviour
     float xRotation;
     float yRotation;
     PlayerControls playerControls;
+    bool inputDisabled;
 
     private void Awake()
     {
@@ -25,16 +26,24 @@ public class PlayerCamera : MonoBehaviour
 
     private void Update()
     {
-        float mouseX = playerControls.Player.LookX.ReadValue<float>() * xSensitivity;
-        float mouseY = playerControls.Player.LookY.ReadValue<float>() * ySensitivity;
+        if (!inputDisabled)
+        {
+            float mouseX = playerControls.Player.LookX.ReadValue<float>() * xSensitivity;
+            float mouseY = playerControls.Player.LookY.ReadValue<float>() * ySensitivity;
 
-        yRotation += mouseX;
+            yRotation += mouseX;
 
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+            xRotation -= mouseY;
+            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        transform.rotation = Quaternion.Euler(0f, yRotation, 0f);
-        orientation.rotation = Quaternion.Euler(0f, yRotation, 0f);
+            transform.rotation = Quaternion.Euler(0f, yRotation, 0f);
+            orientation.rotation = Quaternion.Euler(0f, yRotation, 0f);
+        }
+    }
+
+    public void DisableInput()
+    {
+        inputDisabled = true;
     }
 
     private void OnDestroy()
