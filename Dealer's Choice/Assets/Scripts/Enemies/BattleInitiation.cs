@@ -5,6 +5,7 @@ using UnityEngine;
 public class BattleInitiation : MonoBehaviour
 {
     [SerializeField] float maxDistance = 1f;
+    [SerializeField] float rotationSpeed = 1f;
     [SerializeField] LayerMask playerLayer;
     bool inBattle;
 
@@ -32,7 +33,6 @@ public class BattleInitiation : MonoBehaviour
     IEnumerator FaceMe(Camera cam)
     {
         float lastRotationMagnitude = 360f;
-        float rotationSpeed = 1f;
 
         while (Mathf.Abs(cam.transform.rotation.eulerAngles.magnitude - lastRotationMagnitude) > 0.001f)
         {

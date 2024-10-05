@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 5
+  rotationSpeed: 2
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
