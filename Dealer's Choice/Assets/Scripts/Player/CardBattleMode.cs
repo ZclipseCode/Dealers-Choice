@@ -19,6 +19,17 @@ public class CardBattleMode : MonoBehaviour
             GameObject cardObject = Instantiate(cardPrefab, handTransform);
             cardObjects.Add(cardObject);
         }
+
+        float cardWidth = cardPrefab.GetComponent<SpriteRenderer>().bounds.size.x;
+        float spacing = 0.025f;
+        float totalWidth = (cardWidth + spacing) * hand.Count;
+        float step = totalWidth / hand.Count;
+
+        for (int i = 0; i < hand.Count; i++)
+        {
+            Vector3 position = cardObjects[i].transform.position;
+            cardObjects[i].transform.position = new Vector3(step * (i + .5f) - totalWidth / 2, position.y, position.z);
+        }
     }
 
     public void StartBattle()
