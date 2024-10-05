@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value: 3
   suit: 0
-  art: {fileID: 21300000, guid: ac06e0960f7555b439d95541e221d0d5, type: 3}
+  art: {fileID: 367040932, guid: 327050927cec09945b9b3a5e6b43542a, type: 3}
