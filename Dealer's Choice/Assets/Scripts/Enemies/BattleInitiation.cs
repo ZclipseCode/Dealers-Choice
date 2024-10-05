@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
 
 public class BattleInitiation : MonoBehaviour
 {
@@ -15,19 +16,27 @@ public class BattleInitiation : MonoBehaviour
 
         if (!inBattle && Physics.Raycast(transform.position, transform.forward, out hit, maxDistance, playerLayer))
         {
-            Transform player = hit.transform;
-
-            PlayerMovement playerMovement = player.GetComponentInParent<PlayerMovement>();
-            playerMovement.DisableInput();
-
-            PlayerCamera playerCamera = player.parent.GetComponentInChildren<PlayerCamera>();
-            playerCamera.DisableInput();
-
-            inBattle = true;
-
-            Camera cam = player.parent.GetComponentInChildren<Camera>();
-            StartCoroutine(FaceMe(cam));
+            StartBattle(hit);
         }
+    }
+
+    void StartBattle(RaycastHit hit)
+    {
+        Transform player = hit.transform;
+
+        PlayerMovement playerMovement = player.GetComponentInParent<PlayerMovement>();
+        playerMovement.DisableInput();
+
+        PlayerCamera playerCamera = player.parent.GetComponentInChildren<PlayerCamera>();
+        playerCamera.DisableInput();
+
+        inBattle = true;
+
+        Camera cam = player.parent.GetComponentInChildren<Camera>();
+        StartCoroutine(FaceMe(cam));
+
+        CardBattleMode cardBattleMode = player.GetComponent<CardBattleMode>();
+        cardBattleMode.StartBattle();
     }
 
     IEnumerator FaceMe(Camera cam)

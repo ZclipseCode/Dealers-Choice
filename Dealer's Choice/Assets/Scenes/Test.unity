@@ -248,6 +248,31 @@ Transform:
   - {fileID: 1958971863}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &333851212 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5286700791884658947, guid: 630213db44e2f904a8eba6ad8c9f247c, type: 3}
+  m_PrefabInstance: {fileID: 5785964184239933665}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &333851216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333851212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61107653a248f0b4c80100de6c42d270, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deck: {fileID: 1926247500}
+  cardPrefab: {fileID: 4204063322599841701, guid: 078dfe3212a5d9d42bd47ee5e69b2362, type: 3}
+  handTransform: {fileID: 1926247499}
+--- !u!4 &401961017 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8223938347920664670, guid: 630213db44e2f904a8eba6ad8c9f247c, type: 3}
+  m_PrefabInstance: {fileID: 5785964184239933665}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1419318143
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,6 +472,62 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1926247498
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1926247499}
+  - component: {fileID: 1926247500}
+  m_Layer: 0
+  m_Name: Cards
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1926247499
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926247498}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 401961017}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1926247500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926247498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ca041b4fb29570439afa4b287090769, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cards:
+  - {fileID: 11400000, guid: 132707656bd158d4891278b7d4083aa8, type: 2}
+  - {fileID: 11400000, guid: 1092b6907d9182d4e845339a4b063f9d, type: 2}
+  - {fileID: 11400000, guid: 7feebe6f4d00fca4bba4fd2c4d746510, type: 2}
+  - {fileID: 11400000, guid: da326ebe1cfa02a46bfd23430e67396b, type: 2}
+  - {fileID: 11400000, guid: 8ec5b6af20f43464785de2ace7c152e0, type: 2}
+  - {fileID: 11400000, guid: ee642bf0954899848833b1f230899aae, type: 2}
+  - {fileID: 11400000, guid: da2f2e921c597ee4c80600076211a47a, type: 2}
+  - {fileID: 11400000, guid: 1adb85ec215424a41b234c093c3ff341, type: 2}
+  - {fileID: 11400000, guid: dce1189840302104d8ef5dfefb25b144, type: 2}
+  - {fileID: 11400000, guid: e61602c1ceca3ea4eb236903d6c4b744, type: 2}
+  handSize: 5
 --- !u!1 &1958971862
 GameObject:
   m_ObjectHideFlags: 0
@@ -711,8 +792,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8223938347920664670, guid: 630213db44e2f904a8eba6ad8c9f247c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1926247499}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5286700791884658947, guid: 630213db44e2f904a8eba6ad8c9f247c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 333851216}
   m_SourcePrefab: {fileID: 100100000, guid: 630213db44e2f904a8eba6ad8c9f247c, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

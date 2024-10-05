@@ -122,6 +122,7 @@ public class PlayerMovement : MonoBehaviour
         inputDisabled = true;
         horizontalInput = 0f;
         verticalInput = 0f;
+        rb.velocity = Vector3.zero;
     }
 
     private void OnDestroy()
