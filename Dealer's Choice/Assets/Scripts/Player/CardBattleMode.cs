@@ -14,7 +14,7 @@ public class CardBattleMode : MonoBehaviour
     {
         hand = new List<Card>(new Card[deck.GetHandSize()]);
 
-        foreach(Card card in hand)
+        for (int i = 0; i < hand.Count; i++)
         {
             GameObject cardObject = Instantiate(cardPrefab, handTransform);
             cardObjects.Add(cardObject);
