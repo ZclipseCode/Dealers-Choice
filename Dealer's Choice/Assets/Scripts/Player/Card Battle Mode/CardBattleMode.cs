@@ -10,7 +10,7 @@ public class CardBattleMode : MonoBehaviour
     [SerializeField] GameObject cardPrefab;
     [SerializeField] Transform handTransform;
     List<Card> hand = new List<Card>();
-    List<GameObject> cardObjects = new List<GameObject>();
+    List<CardInfo> cardInfos = new List<CardInfo>();
 
     PlayerControls playerControls;
     bool inputDisabled = true;
@@ -18,12 +18,16 @@ public class CardBattleMode : MonoBehaviour
     Vector3 originalCardSize;
     Vector3 highlightedCardSize;
     int highlightedCardIndex;
+    List<CardInfo> selectedCards = new List<CardInfo>();
+    float originalY;
+    float selectedY;
 
     private void Awake()
     {
         playerControls = new PlayerControls();
         playerControls.CardBattle.Enable();
         playerControls.CardBattle.ControllerCycle.performed += ControllerCycled;
+        playerControls.CardBattle.Select.performed += Selected;
     }
 
     private void Start()
@@ -33,7 +37,8 @@ public class CardBattleMode : MonoBehaviour
         for (int i = 0; i < hand.Count; i++)
         {
             GameObject cardObject = Instantiate(cardPrefab, handTransform);
-            cardObjects.Add(cardObject);
+            CardInfo cardInfo = cardObject.GetComponent<CardInfo>();
+            cardInfos.Add(cardInfo);
         }
 
         float cardWidth = cardPrefab.GetComponent<SpriteRenderer>().bounds.size.x;
@@ -43,14 +48,17 @@ public class CardBattleMode : MonoBehaviour
 
         for (int i = 0; i < hand.Count; i++)
         {
-            Vector3 position = cardObjects[i].transform.position;
-            cardObjects[i].transform.position = new Vector3(step * (i + .5f) - totalWidth / 2, position.y, position.z);
+            Vector3 position = cardInfos[i].transform.position;
+            cardInfos[i].transform.position = new Vector3(step * (i + .5f) - totalWidth / 2, position.y, position.z);
         }
 
         originalCardSize = cardPrefab.transform.localScale;
         highlightedCardSize = cardPrefab.transform.localScale * 1.2f;
 
-        cardObjects[highlightedCardIndex].transform.localScale = highlightedCardSize;
+        cardInfos[highlightedCardIndex].transform.localScale = highlightedCardSize;
+
+        originalY = cardInfos[highlightedCardIndex].transform.position.y;
+        selectedY = originalY + 0.05f;
     }
 
     private void Update()
@@ -67,17 +75,18 @@ public class CardBattleMode : MonoBehaviour
 
         for (int i = 0; i < hand.Count; i++)
         {
-            DisplayCard(cardObjects[i], hand[i]);
+            DisplayCard(cardInfos[i], hand[i]);
         }
 
         inputDisabled = false;
 
         highlightedCardIndex = 0;
-        cardObjects[highlightedCardIndex].transform.localScale = highlightedCardSize;
+        cardInfos[highlightedCardIndex].transform.localScale = highlightedCardSize;
     }
 
-    void DisplayCard(GameObject cardObject, Card card)
+    void DisplayCard(CardInfo cardInfo, Card card)
     {
+        GameObject cardObject = cardInfo.gameObject;
         cardObject.SetActive(true);
         SpriteRenderer spriteRenderer = cardObject.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = card.GetArt();
@@ -99,12 +108,15 @@ public class CardBattleMode : MonoBehaviour
 
     void ControllerCycled(InputAction.CallbackContext context)
     {
-        CycleCards((int)context.ReadValue<float>());
+        if (!inputDisabled && cardBattleState == CardBattleState.pickCards)
+        {
+            CycleCards((int)context.ReadValue<float>());
+        }
     }
 
     void CycleCards(int value)
     {
-        cardObjects[highlightedCardIndex].transform.localScale = originalCardSize;
+        cardInfos[highlightedCardIndex].transform.localScale = originalCardSize;
 
         if (highlightedCardIndex + value >= hand.Count)
         {
@@ -119,12 +131,34 @@ public class CardBattleMode : MonoBehaviour
             highlightedCardIndex += value;
         }
 
-        cardObjects[highlightedCardIndex].transform.localScale = highlightedCardSize;
+        cardInfos[highlightedCardIndex].transform.localScale = highlightedCardSize;
+    }
+
+    void Selected(InputAction.CallbackContext context)
+    {
+        if (!inputDisabled && cardBattleState == CardBattleState.pickCards)
+        {
+            CardInfo cardInfo = cardInfos[highlightedCardIndex];
+
+            if (!selectedCards.Contains(cardInfo))
+            {
+                cardInfo.SetSelected(true);
+                selectedCards.Add(cardInfo);
+                cardInfo.transform.position = new Vector3(cardInfo.transform.position.x, selectedY, cardInfo.transform.position.z);
+            }
+            else
+            {
+                cardInfo.SetSelected(false);
+                selectedCards.Remove(cardInfo);
+                cardInfo.transform.position = new Vector3(cardInfo.transform.position.x, originalY, cardInfo.transform.position.z);
+            }
+        }
     }
 
     private void OnDestroy()
     {
         playerControls.CardBattle.Disable();
-        playerControls.CardBattle.ControllerCycle.performed += ControllerCycled;
+        playerControls.CardBattle.ControllerCycle.performed -= ControllerCycled;
+        playerControls.CardBattle.Select.performed -= Selected;
     }
 }

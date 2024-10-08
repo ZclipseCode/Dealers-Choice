@@ -9,5 +9,7 @@ public class Card : ScriptableObject
     [SerializeField] Suit suit;
     [SerializeField] Sprite art;
 
+    public int GetValue() => value;
+    public Suit GetSuit() => suit;
     public Sprite GetArt() => art;
 }
