@@ -297,6 +297,149 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""CardBattle"",
+            ""id"": ""c4a460a2-e4a0-454e-9e24-51d850d31df2"",
+            ""actions"": [
+                {
+                    ""name"": ""ControllerCycle"",
+                    ""type"": ""Button"",
+                    ""id"": ""b0048ec3-3e60-4c2d-a56c-64b27bb5e21a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""9d75b40e-4aa7-40db-9077-044922614c94"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""89e6e437-4d2b-478a-9c68-71a16fe112ef"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Confirm"",
+                    ""type"": ""Button"",
+                    ""id"": ""a4a975cf-4fe7-45ac-a8a2-fa795ca5e71b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""Shoulders"",
+                    ""id"": ""fc4ff29c-1ac6-4bed-849e-922604c49847"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ControllerCycle"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""34c94309-10c5-41cc-8d23-3cd21830ce1f"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ControllerCycle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""446ac512-89a6-4e9b-93f2-dcde004191a7"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ControllerCycle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a4dd494-f45c-4829-8442-ceedd2a6b957"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8b290d52-d79e-4bf8-bcfa-afa29022bc06"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""69bbb8c9-8364-4216-a31e-e27788708210"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""56cb112d-0802-464e-8ef8-dad87c2338e5"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2ad3e4dc-77cd-4a4a-8244-ea7db72fccdb"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""16a3a1a8-8ac1-465a-a21a-efe00bce0c67"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -335,6 +478,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_LookX = m_Player.FindAction("LookX", throwIfNotFound: true);
         m_Player_LookY = m_Player.FindAction("LookY", throwIfNotFound: true);
+        // CardBattle
+        m_CardBattle = asset.FindActionMap("CardBattle", throwIfNotFound: true);
+        m_CardBattle_ControllerCycle = m_CardBattle.FindAction("ControllerCycle", throwIfNotFound: true);
+        m_CardBattle_Select = m_CardBattle.FindAction("Select", throwIfNotFound: true);
+        m_CardBattle_Cancel = m_CardBattle.FindAction("Cancel", throwIfNotFound: true);
+        m_CardBattle_Confirm = m_CardBattle.FindAction("Confirm", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -462,6 +611,76 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // CardBattle
+    private readonly InputActionMap m_CardBattle;
+    private List<ICardBattleActions> m_CardBattleActionsCallbackInterfaces = new List<ICardBattleActions>();
+    private readonly InputAction m_CardBattle_ControllerCycle;
+    private readonly InputAction m_CardBattle_Select;
+    private readonly InputAction m_CardBattle_Cancel;
+    private readonly InputAction m_CardBattle_Confirm;
+    public struct CardBattleActions
+    {
+        private @PlayerControls m_Wrapper;
+        public CardBattleActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ControllerCycle => m_Wrapper.m_CardBattle_ControllerCycle;
+        public InputAction @Select => m_Wrapper.m_CardBattle_Select;
+        public InputAction @Cancel => m_Wrapper.m_CardBattle_Cancel;
+        public InputAction @Confirm => m_Wrapper.m_CardBattle_Confirm;
+        public InputActionMap Get() { return m_Wrapper.m_CardBattle; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CardBattleActions set) { return set.Get(); }
+        public void AddCallbacks(ICardBattleActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CardBattleActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CardBattleActionsCallbackInterfaces.Add(instance);
+            @ControllerCycle.started += instance.OnControllerCycle;
+            @ControllerCycle.performed += instance.OnControllerCycle;
+            @ControllerCycle.canceled += instance.OnControllerCycle;
+            @Select.started += instance.OnSelect;
+            @Select.performed += instance.OnSelect;
+            @Select.canceled += instance.OnSelect;
+            @Cancel.started += instance.OnCancel;
+            @Cancel.performed += instance.OnCancel;
+            @Cancel.canceled += instance.OnCancel;
+            @Confirm.started += instance.OnConfirm;
+            @Confirm.performed += instance.OnConfirm;
+            @Confirm.canceled += instance.OnConfirm;
+        }
+
+        private void UnregisterCallbacks(ICardBattleActions instance)
+        {
+            @ControllerCycle.started -= instance.OnControllerCycle;
+            @ControllerCycle.performed -= instance.OnControllerCycle;
+            @ControllerCycle.canceled -= instance.OnControllerCycle;
+            @Select.started -= instance.OnSelect;
+            @Select.performed -= instance.OnSelect;
+            @Select.canceled -= instance.OnSelect;
+            @Cancel.started -= instance.OnCancel;
+            @Cancel.performed -= instance.OnCancel;
+            @Cancel.canceled -= instance.OnCancel;
+            @Confirm.started -= instance.OnConfirm;
+            @Confirm.performed -= instance.OnConfirm;
+            @Confirm.canceled -= instance.OnConfirm;
+        }
+
+        public void RemoveCallbacks(ICardBattleActions instance)
+        {
+            if (m_Wrapper.m_CardBattleActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ICardBattleActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CardBattleActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CardBattleActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public CardBattleActions @CardBattle => new CardBattleActions(this);
     private int m_KeyboardandMouseSchemeIndex = -1;
     public InputControlScheme KeyboardandMouseScheme
     {
@@ -486,5 +705,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnLookX(InputAction.CallbackContext context);
         void OnLookY(InputAction.CallbackContext context);
+    }
+    public interface ICardBattleActions
+    {
+        void OnControllerCycle(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
+        void OnCancel(InputAction.CallbackContext context);
+        void OnConfirm(InputAction.CallbackContext context);
     }
 }
