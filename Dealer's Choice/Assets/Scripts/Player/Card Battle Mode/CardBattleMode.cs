@@ -26,7 +26,7 @@ public class CardBattleMode : MonoBehaviour
     {
         playerControls = new PlayerControls();
         playerControls.CardBattle.Enable();
-        playerControls.CardBattle.ControllerCycle.performed += ControllerCycled;
+        playerControls.CardBattle.Cycle.performed += ControllerCycled;
         playerControls.CardBattle.Select.performed += Selected;
     }
 
@@ -158,7 +158,7 @@ public class CardBattleMode : MonoBehaviour
     private void OnDestroy()
     {
         playerControls.CardBattle.Disable();
-        playerControls.CardBattle.ControllerCycle.performed -= ControllerCycled;
+        playerControls.CardBattle.Cycle.performed -= ControllerCycled;
         playerControls.CardBattle.Select.performed -= Selected;
     }
 }

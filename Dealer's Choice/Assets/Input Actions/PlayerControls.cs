@@ -303,7 +303,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             ""id"": ""c4a460a2-e4a0-454e-9e24-51d850d31df2"",
             ""actions"": [
                 {
-                    ""name"": ""ControllerCycle"",
+                    ""name"": ""Cycle"",
                     ""type"": ""Button"",
                     ""id"": ""b0048ec3-3e60-4c2d-a56c-64b27bb5e21a"",
                     ""expectedControlType"": ""Button"",
@@ -347,7 +347,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ControllerCycle"",
+                    ""action"": ""Cycle"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -358,7 +358,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""ControllerCycle"",
+                    ""action"": ""Cycle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -369,7 +369,40 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""ControllerCycle"",
+                    ""action"": ""Cycle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""LeftRightArrows"",
+                    ""id"": ""885bc467-652c-4f72-9718-1646cfb60639"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cycle"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""da167c2c-319a-4f64-9900-7adebc55957d"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cycle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""953d4cd3-c913-4ff1-9b5c-d298f003e977"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cycle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -480,7 +513,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_LookY = m_Player.FindAction("LookY", throwIfNotFound: true);
         // CardBattle
         m_CardBattle = asset.FindActionMap("CardBattle", throwIfNotFound: true);
-        m_CardBattle_ControllerCycle = m_CardBattle.FindAction("ControllerCycle", throwIfNotFound: true);
+        m_CardBattle_Cycle = m_CardBattle.FindAction("Cycle", throwIfNotFound: true);
         m_CardBattle_Select = m_CardBattle.FindAction("Select", throwIfNotFound: true);
         m_CardBattle_Cancel = m_CardBattle.FindAction("Cancel", throwIfNotFound: true);
         m_CardBattle_Confirm = m_CardBattle.FindAction("Confirm", throwIfNotFound: true);
@@ -615,7 +648,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     // CardBattle
     private readonly InputActionMap m_CardBattle;
     private List<ICardBattleActions> m_CardBattleActionsCallbackInterfaces = new List<ICardBattleActions>();
-    private readonly InputAction m_CardBattle_ControllerCycle;
+    private readonly InputAction m_CardBattle_Cycle;
     private readonly InputAction m_CardBattle_Select;
     private readonly InputAction m_CardBattle_Cancel;
     private readonly InputAction m_CardBattle_Confirm;
@@ -623,7 +656,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     {
         private @PlayerControls m_Wrapper;
         public CardBattleActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @ControllerCycle => m_Wrapper.m_CardBattle_ControllerCycle;
+        public InputAction @Cycle => m_Wrapper.m_CardBattle_Cycle;
         public InputAction @Select => m_Wrapper.m_CardBattle_Select;
         public InputAction @Cancel => m_Wrapper.m_CardBattle_Cancel;
         public InputAction @Confirm => m_Wrapper.m_CardBattle_Confirm;
@@ -636,9 +669,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_CardBattleActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_CardBattleActionsCallbackInterfaces.Add(instance);
-            @ControllerCycle.started += instance.OnControllerCycle;
-            @ControllerCycle.performed += instance.OnControllerCycle;
-            @ControllerCycle.canceled += instance.OnControllerCycle;
+            @Cycle.started += instance.OnCycle;
+            @Cycle.performed += instance.OnCycle;
+            @Cycle.canceled += instance.OnCycle;
             @Select.started += instance.OnSelect;
             @Select.performed += instance.OnSelect;
             @Select.canceled += instance.OnSelect;
@@ -652,9 +685,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
 
         private void UnregisterCallbacks(ICardBattleActions instance)
         {
-            @ControllerCycle.started -= instance.OnControllerCycle;
-            @ControllerCycle.performed -= instance.OnControllerCycle;
-            @ControllerCycle.canceled -= instance.OnControllerCycle;
+            @Cycle.started -= instance.OnCycle;
+            @Cycle.performed -= instance.OnCycle;
+            @Cycle.canceled -= instance.OnCycle;
             @Select.started -= instance.OnSelect;
             @Select.performed -= instance.OnSelect;
             @Select.canceled -= instance.OnSelect;
@@ -708,7 +741,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     }
     public interface ICardBattleActions
     {
-        void OnControllerCycle(InputAction.CallbackContext context);
+        void OnCycle(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
         void OnConfirm(InputAction.CallbackContext context);
