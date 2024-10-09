@@ -154,7 +154,7 @@ public class CardBattleMode : MonoBehaviour
         {
             suitMode = selectedCards[0].GetSuit().Equals(cardInfo.GetSuit());
             valueMode = selectedCards[0].GetValue().Equals(cardInfo.GetValue());
-            print(selectedCards[0].GetSuit());
+
             if (!suitMode && !valueMode)
             {
                 return false;
@@ -181,6 +181,8 @@ public class CardBattleMode : MonoBehaviour
             cardInfos[i].SetInfo(hand[i]);
         }
     }
+
+    public void SetInputDisabled(bool value) => inputDisabled = value;
 
     private void OnDestroy()
     {

@@ -36,6 +36,11 @@ public class BattleInitiation : MonoBehaviour
         StartCoroutine(FaceMe(cam));
 
         CardBattleMode cardBattleMode = player.GetComponent<CardBattleMode>();
+        
+        EnemyHealth enemyHealth = GetComponent<EnemyHealth>();
+        enemyHealth.SetCardBattleMode(cardBattleMode);
+        enemyHealth.SetPlayerMovement(playerMovement);
+
         cardBattleMode.StartBattle();
     }
 
