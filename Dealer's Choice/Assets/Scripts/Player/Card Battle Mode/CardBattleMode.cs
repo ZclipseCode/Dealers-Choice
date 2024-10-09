@@ -21,6 +21,8 @@ public class CardBattleMode : MonoBehaviour
     List<CardInfo> selectedCards = new List<CardInfo>();
     float originalY;
     float selectedY;
+    bool suitMode;
+    bool valueMode;
 
     private void Awake()
     {
@@ -48,8 +50,8 @@ public class CardBattleMode : MonoBehaviour
 
         for (int i = 0; i < hand.Count; i++)
         {
-            Vector3 position = cardInfos[i].transform.position;
-            cardInfos[i].transform.position = new Vector3(step * (i + .5f) - totalWidth / 2, position.y, position.z);
+            Vector3 position = cardInfos[i].transform.localPosition;
+            cardInfos[i].transform.localPosition = new Vector3(step * (i + .5f) - totalWidth / 2f, position.y, position.z);
         }
 
         originalCardSize = cardPrefab.transform.localScale;
@@ -57,7 +59,7 @@ public class CardBattleMode : MonoBehaviour
 
         cardInfos[highlightedCardIndex].transform.localScale = highlightedCardSize;
 
-        originalY = cardInfos[highlightedCardIndex].transform.position.y;
+        originalY = cardInfos[highlightedCardIndex].transform.localPosition.y;
         selectedY = originalY + 0.05f;
     }
 
@@ -71,11 +73,11 @@ public class CardBattleMode : MonoBehaviour
 
     public void StartBattle()
     {
-        hand = deck.Draw();
+        ResetHand();
 
         for (int i = 0; i < hand.Count; i++)
         {
-            DisplayCard(cardInfos[i], hand[i]);
+            cardInfos[i].gameObject.SetActive(true);
         }
 
         inputDisabled = false;
@@ -84,20 +86,11 @@ public class CardBattleMode : MonoBehaviour
         cardInfos[highlightedCardIndex].transform.localScale = highlightedCardSize;
     }
 
-    void DisplayCard(CardInfo cardInfo, Card card)
-    {
-        GameObject cardObject = cardInfo.gameObject;
-        cardObject.SetActive(true);
-        SpriteRenderer spriteRenderer = cardObject.GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = card.GetArt();
-    }
-
     void PlayerInput()
     {
         switch (cardBattleState)
         {
             case CardBattleState.pickCards:
-                // refer to ControllerCycled() for controller
                 float mouseScroll = Mouse.current.scroll.ReadValue().normalized.y;
                 CycleCards((int)mouseScroll);
                 break;
@@ -136,22 +129,56 @@ public class CardBattleMode : MonoBehaviour
 
     void Selected(InputAction.CallbackContext context)
     {
-        if (!inputDisabled && cardBattleState == CardBattleState.pickCards)
+        if (!inputDisabled && cardBattleState.Equals(CardBattleState.pickCards))
         {
             CardInfo cardInfo = cardInfos[highlightedCardIndex];
 
-            if (!selectedCards.Contains(cardInfo))
+            if (!selectedCards.Contains(cardInfo) && CanCombo(cardInfo))
             {
                 cardInfo.SetSelected(true);
                 selectedCards.Add(cardInfo);
-                cardInfo.transform.position = new Vector3(cardInfo.transform.position.x, selectedY, cardInfo.transform.position.z);
+                cardInfo.transform.localPosition = new Vector3(cardInfo.transform.localPosition.x, selectedY, cardInfo.transform.localPosition.z);
             }
-            else
+            else if (selectedCards.Contains(cardInfo))
             {
                 cardInfo.SetSelected(false);
                 selectedCards.Remove(cardInfo);
-                cardInfo.transform.position = new Vector3(cardInfo.transform.position.x, originalY, cardInfo.transform.position.z);
+                cardInfo.transform.localPosition = new Vector3(cardInfo.transform.localPosition.x, originalY, cardInfo.transform.localPosition.z);
             }
+        }
+    }
+
+    bool CanCombo(CardInfo cardInfo)
+    {
+        if (selectedCards.Count == 1)
+        {
+            suitMode = selectedCards[0].GetSuit().Equals(cardInfo.GetSuit());
+            valueMode = selectedCards[0].GetValue().Equals(cardInfo.GetValue());
+            print(selectedCards[0].GetSuit());
+            if (!suitMode && !valueMode)
+            {
+                return false;
+            }
+        }
+        else if (selectedCards.Count > 1 && suitMode && !selectedCards[0].GetSuit().Equals(cardInfo.GetSuit()))
+        {
+            return false;
+        }
+        else if (selectedCards.Count > 1 && valueMode && !selectedCards[0].GetValue().Equals(cardInfo.GetValue()))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    void ResetHand()
+    {
+        hand = deck.Draw();
+
+        for (int i = 0; i < hand.Count; i++)
+        {
+            cardInfos[i].SetInfo(hand[i]);
         }
     }
 
