@@ -24,5 +24,13 @@ public class Deck : MonoBehaviour
         return hand;
     }
 
+    public void ReturnToDeck(List<Card> c)
+    {
+        foreach (Card card in c)
+        {
+            cards.Add(card);
+        }
+    }
+
     public int GetHandSize() => handSize;
 }

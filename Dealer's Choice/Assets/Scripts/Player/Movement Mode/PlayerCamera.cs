@@ -41,6 +41,13 @@ public class PlayerCamera : MonoBehaviour
         }
     }
 
+    public void EnableInput()
+    {
+        xRotation = transform.rotation.eulerAngles.x;
+        yRotation = transform.rotation.eulerAngles.y;
+        inputDisabled = false;
+    }
+
     public void DisableInput()
     {
         inputDisabled = true;

@@ -12,11 +12,14 @@ public class BattleInitiation : MonoBehaviour
 
     private void Update()
     {
-        RaycastHit hit;
-
-        if (!inBattle && Physics.Raycast(transform.position, transform.forward, out hit, maxDistance, playerLayer))
+        if (!inBattle)
         {
-            StartBattle(hit);
+            RaycastHit hit;
+
+            if (Physics.Raycast(transform.position, transform.forward, out hit, maxDistance, playerLayer))
+            {
+                StartBattle(hit);
+            }
         }
     }
 
@@ -39,9 +42,8 @@ public class BattleInitiation : MonoBehaviour
         
         EnemyHealth enemyHealth = GetComponent<EnemyHealth>();
         enemyHealth.SetCardBattleMode(cardBattleMode);
-        enemyHealth.SetPlayerMovement(playerMovement);
 
-        cardBattleMode.StartBattle();
+        cardBattleMode.StartBattle(enemyHealth);
     }
 
     IEnumerator FaceMe(Camera cam)

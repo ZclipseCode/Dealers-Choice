@@ -5,14 +5,11 @@ using UnityEngine;
 public class EnemyHealth : Health
 {
     CardBattleMode cardBattleMode;
-    PlayerMovement playerMovement;
 
     public override void Death()
     {
-        cardBattleMode.SetInputDisabled(true);
-        playerMovement.DisableInput();
+        cardBattleMode.EndBattle();
     }
 
     public void SetCardBattleMode(CardBattleMode value) => cardBattleMode = value;
-    public void SetPlayerMovement(PlayerMovement value) => playerMovement = value;
 }

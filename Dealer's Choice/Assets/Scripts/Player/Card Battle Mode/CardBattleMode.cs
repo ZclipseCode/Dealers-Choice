@@ -24,12 +24,17 @@ public class CardBattleMode : MonoBehaviour
     bool suitMode;
     bool valueMode;
 
+    [SerializeField] PlayerMovement playerMovement;
+    [SerializeField] PlayerCamera playerCamera;
+    EnemyHealth enemyHealth;
+
     private void Awake()
     {
         playerControls = new PlayerControls();
         playerControls.CardBattle.Enable();
         playerControls.CardBattle.Cycle.performed += ControllerCycled;
         playerControls.CardBattle.Select.performed += Selected;
+        playerControls.CardBattle.Confirm.performed += Confirmed;
     }
 
     private void Start()
@@ -71,8 +76,10 @@ public class CardBattleMode : MonoBehaviour
         }
     }
 
-    public void StartBattle()
+    public void StartBattle(EnemyHealth enemy)
     {
+        enemyHealth = enemy;
+
         ResetHand();
 
         for (int i = 0; i < hand.Count; i++)
@@ -182,6 +189,48 @@ public class CardBattleMode : MonoBehaviour
         }
     }
 
+    void Confirmed(InputAction.CallbackContext context)
+    {
+        if (!inputDisabled)
+        {
+            if (selectedCards.Count > 0)
+            {
+                foreach (CardInfo cardInfo in selectedCards)
+                {
+                    switch (cardInfo.GetSuit())
+                    {
+                        case Suit.spades:
+                            cardInfo.ActivateAbility(enemyHealth);
+                            break;
+                        case Suit.clubs:
+                            break;
+                        case Suit.diamonds:
+                            break;
+                        case Suit.hearts:
+                            break;
+                    }
+                }
+            }
+
+            deck.ReturnToDeck(hand);
+            ResetHand();
+
+            // combat box
+        }
+    }
+
+    public void EndBattle()
+    {
+        for (int i = 0; i < hand.Count; i++)
+        {
+            cardInfos[i].gameObject.SetActive(false);
+        }
+
+        inputDisabled = true;
+        playerMovement.EnableInput();
+        playerCamera.EnableInput();
+    }
+
     public void SetInputDisabled(bool value) => inputDisabled = value;
 
     private void OnDestroy()
@@ -189,5 +238,6 @@ public class CardBattleMode : MonoBehaviour
         playerControls.CardBattle.Disable();
         playerControls.CardBattle.Cycle.performed -= ControllerCycled;
         playerControls.CardBattle.Select.performed -= Selected;
+        playerControls.CardBattle.Confirm.performed -= Confirmed;
     }
 }

@@ -20,6 +20,11 @@ public class CardInfo : MonoBehaviour
         spriteRenderer.sprite = art;
     }
 
+    public void ActivateAbility(EnemyHealth enemyHealth)
+    {
+        enemyHealth.Damage(value);
+    }
+
     public int GetValue() => value;
     public Suit GetSuit() => suit;
     public void SetSelected(bool value) => selected = value;

@@ -117,6 +117,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void EnableInput()
+    {
+        inputDisabled = false;
+    }
+
     public void DisableInput()
     {
         inputDisabled = true;
