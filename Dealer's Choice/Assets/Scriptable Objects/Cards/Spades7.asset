@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20da76f41c17b504ab0d52e838ef91f0, type: 3}
-  m_Name: S7
+  m_Name: Spades7
   m_EditorClassIdentifier: 
   value: 7
   suit: 0

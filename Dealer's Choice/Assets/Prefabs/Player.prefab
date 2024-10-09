@@ -171,6 +171,72 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &5127874192179689730
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3040229180231116241}
+  - component: {fileID: 7683349086800298614}
+  m_Layer: 0
+  m_Name: Cards
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3040229180231116241
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5127874192179689730}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1050093273230163760}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7683349086800298614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5127874192179689730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ca041b4fb29570439afa4b287090769, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cards:
+  - {fileID: 11400000, guid: 132707656bd158d4891278b7d4083aa8, type: 2}
+  - {fileID: 11400000, guid: 1092b6907d9182d4e845339a4b063f9d, type: 2}
+  - {fileID: 11400000, guid: 7feebe6f4d00fca4bba4fd2c4d746510, type: 2}
+  - {fileID: 11400000, guid: da326ebe1cfa02a46bfd23430e67396b, type: 2}
+  - {fileID: 11400000, guid: 8ec5b6af20f43464785de2ace7c152e0, type: 2}
+  - {fileID: 11400000, guid: ee642bf0954899848833b1f230899aae, type: 2}
+  - {fileID: 11400000, guid: da2f2e921c597ee4c80600076211a47a, type: 2}
+  - {fileID: 11400000, guid: 1adb85ec215424a41b234c093c3ff341, type: 2}
+  - {fileID: 11400000, guid: dce1189840302104d8ef5dfefb25b144, type: 2}
+  - {fileID: 11400000, guid: e61602c1ceca3ea4eb236903d6c4b744, type: 2}
+  - {fileID: 11400000, guid: c9cbcf80bcea29240984cae17a70a709, type: 2}
+  - {fileID: 11400000, guid: 320c4dd35597d394bad45e37dcb67f7e, type: 2}
+  - {fileID: 11400000, guid: 70b2f015424521e4c82fc462eb5cdc51, type: 2}
+  - {fileID: 11400000, guid: a83f87459d41bd544bbec63fe2cb0ef5, type: 2}
+  - {fileID: 11400000, guid: a7cf3c4d927327a4e9a66be1332284e4, type: 2}
+  - {fileID: 11400000, guid: 41639384bdc1fae438d39a58c9aab1ab, type: 2}
+  - {fileID: 11400000, guid: b820da524cee99943934e9b682b94c4a, type: 2}
+  - {fileID: 11400000, guid: fc1f647b5894fae47ae6557a74438456, type: 2}
+  - {fileID: 11400000, guid: 66316db2589738343a11b6a6b18f7c4c, type: 2}
+  - {fileID: 11400000, guid: 3eb6db20258197948a4de15c61ff2404, type: 2}
+  handSize: 5
 --- !u!1 &5286700791884658947
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,6 +248,7 @@ GameObject:
   - component: {fileID: 2145609634017372597}
   - component: {fileID: 2789527949435606679}
   - component: {fileID: 6748739524453340054}
+  - component: {fileID: 5627742227732223728}
   m_Layer: 0
   m_Name: Player Container
   m_TagString: Untagged
@@ -256,6 +323,21 @@ MonoBehaviour:
   jumpForce: 6.5
   jumpCooldown: 0.25
   airMultiplier: 8
+--- !u!114 &5627742227732223728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5286700791884658947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61107653a248f0b4c80100de6c42d270, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deck: {fileID: 7683349086800298614}
+  cardPrefab: {fileID: 4204063322599841701, guid: 078dfe3212a5d9d42bd47ee5e69b2362, type: 3}
+  handTransform: {fileID: 3040229180231116241}
 --- !u!1 &5296221181684292116
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,7 +400,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1050093273230163760}
   m_Father: {fileID: 7305700441433632027}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &688265818132144577
@@ -360,7 +443,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 119
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -441,3 +524,87 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraPosition: {fileID: 6647134597718321032}
+--- !u!1 &8864729898376663552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1050093273230163760}
+  - component: {fileID: 7385397020234787624}
+  m_Layer: 0
+  m_Name: Card Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1050093273230163760
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8864729898376663552}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3040229180231116241}
+  m_Father: {fileID: 8223938347920664670}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &7385397020234787624
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8864729898376663552}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 3
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 128
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
