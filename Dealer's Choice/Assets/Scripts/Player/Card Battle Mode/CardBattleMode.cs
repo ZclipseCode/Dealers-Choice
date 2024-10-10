@@ -142,17 +142,27 @@ public class CardBattleMode : MonoBehaviour
 
             if (!selectedCards.Contains(cardInfo) && CanCombo(cardInfo))
             {
-                cardInfo.SetSelected(true);
-                selectedCards.Add(cardInfo);
-                cardInfo.transform.localPosition = new Vector3(cardInfo.transform.localPosition.x, selectedY, cardInfo.transform.localPosition.z);
+                SelectCard(cardInfo);
             }
             else if (selectedCards.Contains(cardInfo))
             {
-                cardInfo.SetSelected(false);
-                selectedCards.Remove(cardInfo);
-                cardInfo.transform.localPosition = new Vector3(cardInfo.transform.localPosition.x, originalY, cardInfo.transform.localPosition.z);
+                DeselectCard(cardInfo);
             }
         }
+    }
+
+    void SelectCard(CardInfo cardInfo)
+    {
+        cardInfo.SetSelected(true);
+        selectedCards.Add(cardInfo);
+        cardInfo.transform.localPosition = new Vector3(cardInfo.transform.localPosition.x, selectedY, cardInfo.transform.localPosition.z);
+    }
+
+    void DeselectCard(CardInfo cardInfo)
+    {
+        cardInfo.SetSelected(false);
+        selectedCards.Remove(cardInfo);
+        cardInfo.transform.localPosition = new Vector3(cardInfo.transform.localPosition.x, originalY, cardInfo.transform.localPosition.z);
     }
 
     bool CanCombo(CardInfo cardInfo)
@@ -181,6 +191,11 @@ public class CardBattleMode : MonoBehaviour
 
     void ResetHand()
     {
+        for (int i = selectedCards.Count - 1; i >= 0 ; i--)
+        {
+            DeselectCard(selectedCards[i]);
+        }
+
         hand = deck.Draw();
 
         for (int i = 0; i < hand.Count; i++)
